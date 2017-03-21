@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <script>var version = '20150526';</script>
+    <style type="text/css">
+    	.header{
+            background: #d3ddff;
+            height: 70px;
+        }
+        .footer{
+            background: #ffd6de;
+            height: 70px;
+        }
+        .body{
+            background: #c4ffff;
+            /*height: 300px;*/
+        }
+    </style>
+</head>
+<body>
+<div id="homeApp" ng-controller="homeCtrl">
+    <div class="header" ui-view="header"></div>
+    <div class="body" ui-view="body"></div>
+    <div class="footer" ui-view="footer"></div>
+</div>
+<script src="./three/seajs/2.2.0/sea.js"></script>
+<script src="./common/base/seaJSConfig.js"></script>
+<script>
+    seajs.use('./controller/homeCtrl.js',function(home){
+        home.init();
+    })
+</script>
+</body>
+</html>
