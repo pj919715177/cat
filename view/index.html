@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home/index</title>
+    <link rel="stylesheet" href="./view/css/index.css"/>
+    <script>
+//        var basePath = window.location.protocol + "//" +  window.location.host + "/MusicStation";
+    </script>
+</head>
+
+<style>
+
+</style>
+<div class="indexDiv">
+    <article>
+        <section class="slideFa">
+            <div class="adPic slider" id="adPic">
+                <ul>
+                    <!--<li ng-repeat="adData in adList"><a href="' + basePath +  Data[i].url + '"><img src="' + basePath + Data[i].imgUrl + '" alt=' + Data[i].name + '></a></li>-->
+                </ul>
+            </div>
+            <div class="adList" id="adList">
+                <div class="showAdList"></div>
+                <ul>
+                </ul>
+            </div>
+        </section>
+        <!-- 论坛期刊 -->
+        <section>
+            <header>
+                <h2 class="blockTitle">论坛期刊</h2>
+                <ul class="blockMore">
+                    <li><a>独立音乐</a></li>
+                    <li><a>民谣</a></li>
+                    <li><a>金属</a></li>
+                    <li><a>电子</a></li>
+                    <li><a>流行</a></li>
+                    <li><a>英伦</a></li>
+                    <li><a>后摇</a></li>
+                    <li><a>迷幻</a></li>
+                    <li><a>暗潮</a></li>
+                    <li><a>更多</a></li>
+                </ul>
+            </header>
+            <div class="blockContent" id="periodicalBlock">
+                <div class="periodical-first">
+                    <img class="img-set" src="{{bsBasePath + periodicalList[0].imgUrl}}" alt="periodicalList[0].name">
+                    <p class="img-dis">{{periodicalList[0].discript}}</p>
+                </div>
+                <div class="periodical-other">
+                    <div class="periodical-otherin">
+                        <img class="img-set" src="{{bsBasePath + periodicalList[1].imgUrl}}" alt="periodicalList[1].name">
+                        <p class="img-dis">{{periodicalList[1].discript}}</p>
+                    </div>
+                    <div class="periodical-otherin">
+                        <img class="img-set" src="{{bsBasePath + periodicalList[2].imgUrl}}" alt="periodicalList[2].name">
+                        <p class="img-dis">{{periodicalList[2].discript}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 用户推荐 -->
+        <section>
+            <header>
+                <h2 class="blockTitle">用户推荐</h2>
+                <ul class="blockMore">
+                    <li><a>单曲</a></li>
+                    <li><a>专栏</a></li>
+                    <li><a>更多</a></li>
+                </ul>
+            </header>
+            <div class="blockContent" id="originalBlock">
+                <div class="original-first">
+                    <img class="original-img" src="{{bsBasePath + userRecList[0].imgUrl}}" alt="userRecList[0].name">
+                    <div class="original-title">
+                        <h5>{{userRecList[0].name}}'</h5>
+                        <p class="original-order">{{userRecList[0].author}}</p>
+                        <p class="original-date">{{userRecList[0].createDate}}</p>
+                    </div>
+                    <p class="img-dis">{{userRecList[0].discript}}</p>
+                </div>
+                <div class="original-other">
+                    <img class="img-set" src="{{bsBasePath + userRecList[1].imgUrl}}" alt="userRecList[1].name">
+                    <p class="img-dis">{{userRecList[1].name}}</p>
+                    <p class="original-order">{{userRecList[1].createDate}}</p>
+                </div>
+                <div class="original-other">
+                    <img class="img-set" src="{{bsBasePath + userRecList[2].imgUrl}}" alt="userRecList[2].name">
+                    <p class="img-dis">{{userRecList[2].name}}</p>
+                    <p class="original-order">{{userRecList[2].createDate}}</p>
+                </div>
+            </div>
+        </section>
+        <!-- 热门活动 -->
+        <section>
+            <header>
+                <h2 class="blockTitle">热门活动</h2>
+                <ul class="blockMore">
+                    <li><a>单曲</a></li>
+                    <li><a>专栏</a></li>
+                    <li><a>更多</a></li>
+                </ul>
+            </header>
+            <div class="blockContent activity-blockContent" id="activityBlock"></div>
+        </section>
+    </article>
+</div>

@@ -1,0 +1,37 @@
+{
+  "data":[
+    {
+      "name":"活动1",
+      "imgUrl":"/img/activity1.jpg",
+      "url":"#",
+      "discript":"图片描述",
+      "date":"2016-05-06",
+      "address":"上海"
+    },
+    {
+      "name":"活动2",
+      "imgUrl":"/img/activity2.jpg",
+      "url":"#",
+      "discript":"图片描述",
+      "date":"2016-05-06",
+      "address":"上海"
+    },
+    {
+      "name":"活动3",
+      "imgUrl":"/img/activity3.jpg",
+      "url":"#",
+      "discript":"图片描述",
+      "date":"2016-05-06",
+      "address":"上海"
+    },
+    {
+      "name":"活动4",
+      "imgUrl":"/img/activity4.jpg",
+      "url":"#",
+      "discript":"图片描述",
+      "date":"2016-05-06",
+      "address":"上海"
+    }
+  ],
+  "re":"1"
+}

@@ -1,0 +1,26 @@
+
+    <style>
+    .body-body{
+    	height:100%;
+    }
+.select{
+    background-color: #86cc7c;
+    width: 30%;
+    height: 100%;
+    min-width: 87px;
+    float: left
+}
+.content{
+    background-color: #f6ffb3;
+    width: 70%;
+    height: 100%;
+    min-width: 150px;
+    float: left
+}
+    </style>
+
+<div class="body-body">
+    {{msg}}
+    <div class="select" ui-view="select"></div>
+    <div class="content" ui-view="content"></div>
+</div>

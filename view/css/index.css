@@ -1,0 +1,265 @@
+body{
+    font: 13px/22px Verdana, 微软雅黑, 'Microsoft YaHei', Helvetica, Arial;
+}
+
+.img-set {
+    width: 100%;
+    border-radius: 7px;
+}
+body>header {
+    background: rgba(220, 220, 220, 0.37);
+    position: relative;
+    margin: -8px;
+    border-top: 2px solid #D83200;
+}
+.header-block{
+    width: 85%;
+    margin: 0px auto;
+    line-height: 35px;
+}
+.header-block-icon{
+    display: inline-block;
+    margin: 5px;
+    line-height: 35px;
+}
+nav{
+    display: inline-block;
+    font-size: 17px;
+}
+nav>ul>li {
+    display: inline-block;
+    margin-right: 15px;
+}
+.login {
+    display: inline-block;
+    float: right;
+    line-height: 35px;
+    margin: 5px;
+    font-size: 15px;
+    color: #676767;
+}
+article {
+    width: 65%;
+    margin: 15px auto;
+    padding: 20px;
+    min-width: 500px;
+}
+.adPic>ul ,.adList ul{
+    padding: 0;
+    margin: 0;
+}
+.adPic li {
+    list-style: none;
+}
+.adPic li:first-child {
+    display: block;
+}
+.adList {
+    width: 50%;
+    margin: 0px auto;
+    text-align: center;
+    position: relative;
+}
+.adList li {
+    display: inline-block;
+    width: 25%;
+}
+.adPic img {
+    width: 100%;
+}
+.adList a {
+    display: block;
+    background: rgba(134, 134, 134, 0.49);
+    width: 70%;
+    height: 5px;
+    margin: auto;
+    border-radius: 50%;
+}
+
+section header {
+    margin: 15px auto;
+}
+.blockTitle {
+    border-left: 3px solid #d83200;
+    padding: 0px 10px;
+    display: inline-block;
+    margin: 0px;
+}
+.blockMore {
+    padding: 0px;
+    margin: 0px;
+    float: right;
+    display: inline-block;
+}
+.blockMore li {
+    display: inline-block;
+}
+.blockMore a {
+    color: #888;
+}
+.blockMore a:hover {
+    color: #d83200;
+}
+.blockContent {
+    display: flex;
+}
+.periodical-first {
+    width: 69%;
+    display: inline-block;
+    margin: 7px;
+}
+.periodical-first img {
+    width: 100%;
+}
+.img-dis {
+    margin: 0;
+}
+.img-dis:hover {
+    color: #d83200;
+    cursor: pointer;
+}
+.periodical-other {
+    width: 30%;
+    display: inline-block;
+    margin: 7px;
+}
+.original-first {
+    width: 50%;
+    margin: 10px;
+}
+.original-img {
+    display: inline-block;
+    width: 30%;
+    border-radius: 100%;
+}
+.original-title {
+    display: inline-block;
+    position: relative;
+    top: -30px;
+    padding: 10px;
+}
+.original-title h5:hover {
+    color: #d83200;
+    cursor: pointer;
+}
+.original-title h5 {
+    margin: 10px auto;
+    font-size: 20px;
+}
+.original-order {
+    margin: 5px 0px;
+    color: #999;
+}
+.original-date {
+    display: block;
+    font-size: 5px;
+    color: #999;
+    margin: 0;
+}
+.original-other {
+    width: 25%;
+    margin: 5px;
+}
+.activity-blockContent{
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.activity-block {
+    width: 33%;
+    display: flex;
+    margin: 10px 0px;
+}
+.activity-block img {
+    width: 39%;
+    height: 14vw;
+}
+.activity-dis {
+    display: table-cell;
+    width: 65%;
+    height: 200px;
+    font-size: 15px;
+    padding: 20px 5px;
+}
+.activity-dis h3 {
+    margin: 5px 0px;
+    font-size: 1.5vw;
+    font-weight: normal;
+}
+.activity-dis {
+    display: table-cell;
+    width: 65%;
+    height: 200px;
+    font-size: 15px;
+    padding: 20px 5px;
+}
+.activity-dis-content p {
+    color: #999;
+    margin: 0;
+}
+footer {
+    background: rgba(0, 0, 0, 0.84);
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    margin: -8px;
+}
+footer .footer-dis {
+    width: 22.33%;
+    text-align: center;
+}
+.footer-dis ul {
+    padding: 0;
+}
+.footer-dis li {
+    list-style: none;
+}
+ul {
+    list-style:none;
+}
+
+.slideFa{
+    overflow: hidden;
+}
+.slider {
+    width: 400%;
+    -webkit-animation: slide1 20s ease-out infinite;
+}
+
+.slider li {
+    float:left;
+    width:25%;
+    height:100%;
+}
+
+@-webkit-keyframes slide1 {
+    0% { margin-left:0;}
+    14% { margin-left:-100%;}
+    29% { margin-left:-200%;}
+    43% { margin-left:-300%;}
+    60% { margin-left:-200%;}
+    74% { margin-left:-100%;}
+    100% {margin-left:0;}
+}
+.showAdList {
+    width: 100%;
+    background: #d83200;
+    width: 25%;
+    height: 5px;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+    bottom: 6px;
+
+    -webkit-animation: showslide1 20s ease-out infinite;
+}
+@-webkit-keyframes showslide1 {
+    0% { margin-left:0;}
+    14% { margin-left:25%;}
+    29% { margin-left:50%;}
+    43% { margin-left:75%;}
+    60% { margin-left:50%;}
+    74% { margin-left:25%;}
+    100% {margin-left:0;}
+}

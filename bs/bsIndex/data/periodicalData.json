@@ -1,0 +1,23 @@
+{
+  "data":[
+    {
+      "name":"期刊1",
+      "imgUrl":"/img/periodical.jpg",
+      "url":"#",
+      "discript":"图片描述"
+    },
+    {
+      "name":"期刊2",
+      "imgUrl":"/img/periodical2.jpg",
+      "url":"#",
+      "discript":"图片描述"
+    },
+    {
+      "name":"期刊3",
+      "imgUrl":"/img/periodical3.jpg",
+      "url":"#",
+      "discript":"图片描述"
+    }
+  ],
+  "re":"1"
+}
