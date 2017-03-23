@@ -1,0 +1,41 @@
+.catmarker {
+    background: #ffffff;
+    border: 3px solid #60c9ef;
+    border-radius: 10px;
+    text-align: center;
+    width: 90px;
+}
+.catmarker:after {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    margin-left: -12px;
+    border: 12px solid transparent;
+    border-color: #60c9ef transparent transparent;
+}
+.catmarker img{
+    width: 80px;
+    margin: 5px 5px 0px;
+    border-radius: 5px;
+}
+.catmarker .catmarkerP {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+.catmarker .catmarkerP p{
+    width: 100%;
+    color: #868686;
+    padding: 0px;
+    margin: 0px;
+    transform: scale(0.7,0.7);
+    white-space: nowrap;
+    margin-left: -10px;
+}
+.amap-marker:hover {
+    z-index:101!important;
+}
+.districtCatImg{
+    width: 50px;
+    margin:2px;
+}

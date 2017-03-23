@@ -2,7 +2,8 @@ seajs.config({
 	base:'./three/',
 	alias:{
 		"jquery":"jquery/jquery-1.8.3.js",
-		"angular":"angular/1.5.6/angular-1.5.6.js"
+		"angular":"angular/1.5.6/angular-1.5.6.js",
+		"layer":"layer/layer.js"
 	}
 });
 // make it safe to use console.log always

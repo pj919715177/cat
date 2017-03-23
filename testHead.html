@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Google Phone Gallery</title>
+    <script src="./three/jquery/jquery-1.8.3.js"></script>
+    <script src="./three/angular/1.5.6/angular-1.5.6.js"></script>
+    <script src="three/layer/layer.js"></script>
+</head>
+
+<body id="doModule">
+        <p ng-show="flag==true">456</p>
+    <div ng-controller="testVar">
+        <p ng-show="flag==true">123</p>
+        <button ng-click="flag=false">change flag false</button>
+        <button ng-click="flag=true">change flag true</button>
+    </div>
+    <script>
+//    angular.module('doModule', []);
+//    angular.module('doModule').controller('testVar', ['$scope', function($scope) {
+//    }]);
+//    angular.bootstrap(document.getElementById("doModule"), ['doModule']);
+        layer.msg('hello')
+    </script>
+</body>
+
+</html>
