@@ -7,7 +7,7 @@ angular.module('mapApp').controller('mapViewCtrl',['$scope','mapService',functio
 	$scope.catDetail = {
 	}
 	$scope.show.openUserBombFlag = false;//是否显示user基础信息弹框
-	$scope.activityList = new Array();
+	$scope.activityAllList = new Array();
 
 	var me = this;
 
@@ -75,21 +75,78 @@ angular.module('mapApp').controller('mapViewCtrl',['$scope','mapService',functio
 	}
 	//弹出活动弹窗
 	$scope.openActivityList = function(){
-		layer.open({
+		var windowWidth = document.body.clientWidth;
+		console.log(windowWidth)
+		var layerAres = 'auto';
+		var closeBtn = 1;
+		if(windowWidth <= 320){  //不可能
+			var layerAres = ['' + windowWidth + 'px'];
+			var closeBtn = 0;
+		}else if(windowWidth > 320 && windowWidth <= 767){  //手机屏幕
+			var layerAres = ['' + windowWidth + 'px'];
+			var closeBtn = 0;
+		}else if (windowWidth > 767 && windowWidth <= 992){ //平板屏幕
+			var layerAres = ['' + 600 + 'px'];
+			var closeBtn = 1;
+		}else if(windowWidth > 992 && windowWidth <= 1200){ //小的电脑
+			var layerAres = ['' + 600 + 'px'];
+			var closeBtn = 1;
+		}else if(windowWidth >1200){ //大屏电脑
+			var layerAres = ['' + 600 + 'px'];
+			var closeBtn = 1;
+		}
+		$scope.activityListLayer = layer.open({
 			type:1,
 			title:false,
-			area:['315px','529px'],
+			area: layerAres,
+			closeBtn : closeBtn,
+			shadeClose: true,
 			content:$('#activityBomb'),
 			success:function(){
 				var activityData = mapService.getActivityData();
+				for(i in activityData){
+					activityData[i].discriptShow = false;
+					activityData[i].applicantListShow = false;
+				}
 				if(typeof activityData === 'string'){
 					layer.msg(activityData);
 				}else{
-					$scope.activityList = activityData;
+					$scope.activityAllList = activityData;
 				}
 			}
 
 		})
+	}
+	//展出或缩起活动参与者列表
+	$scope.getApplicantList = function(activityID,applicantListShow){
+		console.log(activityID+"----"+applicantListShow)
+		if(applicantListShow === false){
+			var applicantList = mapService.getApplicantListByActivityID(activityID);
+			if(typeof applicantList === "string"){
+				layer.msg(applicantList);
+			}else{
+				for(i in $scope.activityAllList){
+					if($scope.activityAllList[i].id === activityID){
+						$scope.activityAllList[i].applicantList = applicantList;
+						$scope.activityAllList[i].applicantListShow = true;
+					}
+				}
+			}
+		}else{
+			for(i in $scope.activityAllList){
+				if($scope.activityAllList[i].id === activityID){
+					$scope.activityAllList[i].applicantListShow = false;
+				}
+			}
+		}
+
+	}
+	//关闭活动弹窗
+	$scope.closeActivityList = function(){
+		if($scope.activityListLayer){
+			layer.close($scope.activityListLayer);
+			$scope.activityListLayer = null;
+		}
 	}
 	//添加聚集
 	function addCluster(markerList){
@@ -127,6 +184,7 @@ angular.module('mapApp').controller('mapViewCtrl',['$scope','mapService',functio
 			content: $('#catDetail')//这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
 		});
 	}
+
 
 	// this.findCityAdcode = function(){
 	// 	AMap.service('AMap.DistrictSearch',function(){

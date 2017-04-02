@@ -29,18 +29,28 @@
                 //获取活动列表信息
                 var getActivityData = function(){
                     var activityData = getDateBaseFactory.getActivityRecData();
-                    console.log(activityData);
-                    if(activityData.re == '0'){
+                    // console.log(activityData);
+                    if(activityData.re && activityData.re == '0'){
                         return activityData.data;
                     }else{
                         return '获取活动列表信息失败'
                     }
                 }
 
+                //通过活动ID获取参与者名单
+                var getApplicantListByActivityID = function(activityID){
+                    var applicantList = getDateBaseFactory.getApplicantListByActivityID();
+                    if(applicantList.re && applicantList.re == '0'){
+                        return applicantList.data;
+                    }else{
+                        return '获取活动参与者信息失败'
+                    }
+                }
 
                 this.getAllCatData = getAllCatData;
                 this.createMap = createMap;
                 this.getActivityData = getActivityData;
+                this.getApplicantListByActivityID = getApplicantListByActivityID;
 
             }])
 

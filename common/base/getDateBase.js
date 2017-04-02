@@ -77,12 +77,32 @@
             });
             return re;
         }
+        //通过活动ID获取参与者名单
+        var getApplicantListByActivityID = function(activityID){
+            var re = null;
+            $.ajax({
+                url: basePath + 'bsCat/applicant.json',
+                type: 'POST',
+                data:activityID,
+                dataType: 'JSON',
+                async: false,
+                success: function(data) {
+                    re = data;
+                    console.log(re);
+                },
+                error: function() {
+                    console.log('getaActivityData--DateBase获取失败');
+                }
+            });
+            return re;
+        }
 
         return {
             getAllCatData: getAllCatData,
             getAllPeriodical: getAllPeriodical,
             getUserRec: getUserRec,
-            getActivityRecData: getActivityRecData
+            getActivityRecData: getActivityRecData,
+            getApplicantListByActivityID: getApplicantListByActivityID
         }
 
     }])
