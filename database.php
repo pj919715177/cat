@@ -16,7 +16,7 @@ CREATE TABLE `cat`(
 	`location` varchar(180) NOT NULL DEFAULT '' COMMENT '地址',
 	`age` int(11) NOT NULL DEFAULT 0 COMMENT '年龄',
 	`type` varchar(180) NOT NULL DEFAULT '' COMMENT '品种',
-	`introduce` text DEFAULT '' COMMENT '简介',
+	`introduce` text COMMENT '简介',
 	PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='猫表';
 
@@ -37,7 +37,7 @@ CREATE TABLE `user`(
 	`email` varchar(180) NOT NULL DEFAULT '' COMMENT '用户邮箱（账号）',
 	`password` varchar(180) NOT NULL DEFAULT '' COMMENT '用户密码',
 	`imgUrl` varchar(500) NOT NULL DEFAULT '' COMMENT '用户头像图片链接',
-	`signature` text NOT NULL DEFAULT '' COMMENT '签名',
+	`signature` text NOT NULL COMMENT '签名',
 	`createTime` int(11) NOT NULL DEFAULT 0 COMMENT '开户时间',
 	primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
@@ -48,7 +48,7 @@ CREATE TABLE `focus`(
 	`focusUserId` int(11) NOT NULL DEFAULT 0 COMMENT '关注者id',
 	`beFocusId` int(11) NOT NULL DEFAULT 0 COMMENT '被关注者id',
 	`focusTime` int(11) NOT NULL DEFAULT 0 COMMENT '关注时间',
-	primary key(`id`),
+	primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='关注表';
 
 --活动表
@@ -57,15 +57,15 @@ CREATE TABLE `activity`(
 	`activityName` varchar(180) NOT NULL DEFAULT '' COMMENT '活动名',
 	`latitude` int(11) NOT NULL DEFAULT 0 COMMENT '坐标纬度*1000000',
 	`longitude` int(11) NOT NULL DEFAULT 0 COMMENT '坐标经度*1000000',
-	`location` text NOT NULL DEFAULT '' COMMENT '活动地址',
+	`location` text NOT NULL COMMENT '活动地址',
 	`host_id` int(11) NOT NULL DEFAULT 0 COMMENT '发起用户id',
 	`applyStartTime` int(11) NOT NULL DEFAULT 0 COMMENT '活动报名开始时间',
 	`applyEndTime` int(11) NOT NULL DEFAULT 0 COMMENT '活动报名结束时间',
 	`startTime` int(11) NOT NULL DEFAULT 0 COMMENT '活动开始时间',
 	`endTime` int(11) NOT NULL DEFAULT 0 COMMENT '活动结束时间',
 	`theme` varchar(500) NOT NULL DEFAULT '' COMMENT '活动主题',
-	`introduce` text NOT NULL DEFAULT '' COMMENT '活动简介',
-	`process` text NOT NULL DEFAULT '' COMMENT '活动回顾',
+	`introduce` text NOT NULL COMMENT '活动简介',
+	`process` text NOT NULL COMMENT '活动回顾',
 	`coverImg` varchar(255) NOT NULL DEFAULT '' COMMENT '活动封面',
 	primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动表';
@@ -76,6 +76,6 @@ CREATE TABLE `apply`(
 	`activityId` int(11) NOT NULL DEFAULT 0 COMMENT '活动id',
 	`userId` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
 	`applyTime` int(11) NOT NULL DEFAULT 0 COMMENT '报名时间',
-	`other` text NOT NULL DEFAULT '' COMMENT '备注',
+	`other` text NOT NULL COMMENT '备注',
 	primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动报名表';
