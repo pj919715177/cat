@@ -42,4 +42,13 @@ class database
 		$result = $statement->execute($params);
 		return $result;
 	}
+
+	public function checkUser($email, $password)
+	{
+		$sql = 'SELECT * from user WHERE email=":email" AND password=":password"';
+		$statement = $this->pdo->prepare($sql);
+		$params = [':email' => $email, ':password' => $password];
+		$result = $statement->execute($params);
+		return $result;
+	}
 }
