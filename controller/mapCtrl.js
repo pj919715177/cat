@@ -38,8 +38,26 @@ define(
                             ]);
                         }]
                     }
-                }
-            )
+                })
+                .state('regist', {
+                    url: '/regist',
+                    views: {
+                        'mainContent': {
+                            templateUrl: './view/regist.html',
+                            controller: 'registCtrl',
+                        }
+                    },
+                    resolve: {
+                        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                './controller/registCtrl.js',
+                                // './common/service/otherService.js',
+                                './common/base/getDateBase.js',
+                            ]);
+                        }]
+                    }
+                })
+            
         })
 
         mapModule.controller('mapControl', ["$scope", function($scope, mapService) {
