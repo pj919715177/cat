@@ -51,4 +51,13 @@ class database
 		$result = $statement->execute($params);
 		return $result;
 	}
+
+	public function getUser($email)
+	{
+		$sql = 'SELECT * from user WHERE email=":email"';
+		$statement = $this->pdo->prepare($sql);
+		$params = [':email' => $email];
+		$result = $statement->execute($params);
+		return $result;
+	}
 }
