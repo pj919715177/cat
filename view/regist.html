@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>regist</title>
+    <script>
+    </script>
+    <link rel="style" href="three/bootstrap/bootstrap.min.css"/>
+<style>
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.registBlock {
+    width: 100%;
+    height: 100%;
+    background: #005ea2;
+    color: #fff;
+}
+.registBlock article{
+    max-width: 1002px;
+    position: relative;
+    top: 20px;
+}
+section {
+    border: 1px solid #fff;
+    padding-top: 25px;
+    background: #fff;
+    color: #565656;
+}
+.regist-schedule {
+    height: 40px;
+    background-color: #3c87bd;
+    border-right: 1px solid #848484;
+    line-height: 40px;
+}
+.registBlock .show {
+    color: #ffffff;
+    background-color: #dad662;
+}
+.registBlock .had{
+    background-color: #46a59b;
+}
+.registBlock .will{
+    background-color: #a2a2a2;
+}
+.row{
+    width: 100%;
+    margin: 0 auto;
+}
+.input-list {
+    margin: 10px 0px;
+}
+.input-list i{
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    margin-top: -15px;
+}
+.sub-btn {
+    width: 100%;
+    margin-top: 25px;
+}
+
+/* 小屏幕（平板，大于等于 768px） */
+@media (min-width: 767px) and (max-width:992px) {
+    .input-list label{
+        text-align: right;
+    }
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: 992px) and (max-width:1200px) {
+    .input-list label{
+        text-align: right;
+    }
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: 1200px){
+    .input-list label{
+        text-align: right;
+    }
+}
+
+</style>
+</head>
+<div class="registBlock">
+    <article class="container">
+        <nav class="row">
+            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='base', 'had': show.schedule=='detail'||show.schedule=='finish'}">填写账号信息</div>
+            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='detail', 'had': show.schedule=='finish','will':show.schedule=='base'}">完善账号信息</div>
+            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='finish', 'will':show.schedule=='detail'||show.schedule=='base'}">注册成功</div>
+        </nav>
+        <section ng-show="show.schedule=='base'">
+            <div class="regist-base-form">
+                <form>
+                    <ul>
+                        <li class="input-list row">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label text-left">邮箱：</label>
+                            <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registEmail"/> -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="text" class="form-control" id="" ng-model="registEmail">
+                                <i ng-hide="show.registEmailIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
+                                <i ng-show="show.registEmailIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                            </div>
+                        </li>
+                        <li class="input-list row">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">昵称：</label>
+                            <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registNickname"/> -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="text" class="form-control" id="" ng-model="registNickname">
+                                <i ng-hide="show.registNicknameIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
+                                <i ng-show="show.registNicknameIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                            </div>
+                        </li>
+                        <li class="input-list row">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">密码：</label>
+                            <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPassword"/> -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="text" class="form-control" id="" ng-model="registPassword">
+                                <i ng-hide="show.registPasswordIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
+                                <i ng-show="show.registPasswordIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                            </div>
+                        </li>
+                        <li class="input-list row">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">确认密码：</label>
+                            <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPardenPassword"/> -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="text" class="form-control" id="" ng-model="registPardenPassword">
+                                <i ng-hide="show.registPardenPasswordIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
+                                <i ng-show="show.registPardenPasswordIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                            </div>
+                        </li>
+                        <li class="input-list row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <button type="button" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="addRegist()">下一步</button>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+        <section ng-show="show.schedule=='detail'">
+            <div class="regist-detail-form">
+                <form>
+                    <ul>
+                        <li class="input-list row"> 
+                            <lable for="registHeadUrl" class="col-md-3 col-sm-3 col-xs-12 control-label text-left">
+                                <!-- <img ng-src={{files[0].name}} /> -->
+                            </lable>
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="file" id="registHeadUrl" onchange='angular.element(this).scope().fileChanged(this)' /></input>
+                            </div>
+                        </li>
+                        <li class="input-list row">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label text-left">签名：</label>
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <textarea class="form-control" ng-model="signature"></textarea>
+                            </div>
+                        </li>
+                        <li class="input-list row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <button type="button" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="upUserDetail()">提交</button>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+        <section ng-show="show.schedule=='finish'">
+            完成<a href="./map.html">back</a>
+        </section>
+    </article>
+</div>
