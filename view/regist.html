@@ -51,9 +51,10 @@ section {
 }
 .input-list {
     margin: 10px 0px;
+    position: relative;
 }
 .input-list i{
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 50%;
     right: 25px;
@@ -63,11 +64,24 @@ section {
     width: 100%;
     margin-top: 25px;
 }
-
+.Tipmsg {
+    position: absolute;
+    right: 15px;
+    color: #b30000;
+}
 /* 小屏幕（平板，大于等于 768px） */
 @media (min-width: 767px) and (max-width:992px) {
     .input-list label{
         text-align: right;
+    }
+    .input-list{
+        margin: 25px 0px;
+    }
+    .Tipmsg {
+        position: absolute;
+        right: 19%;
+        color: #b30000;
+        top: -21px;
     }
 }
 
@@ -76,12 +90,30 @@ section {
     .input-list label{
         text-align: right;
     }
+    .input-list{
+        margin: 25px 0px;
+    }
+    .Tipmsg {
+        position: absolute;
+        right: 19%;
+        color: #b30000;
+        top: -21px;
+    }
 }
 
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: 1200px){
     .input-list label{
         text-align: right;
+    }
+    .input-list{
+        margin: 25px 0px;
+    }
+    .Tipmsg {
+        position: absolute;
+        right: 19%;
+        color: #b30000;
+        top: -21px;
     }
 }
 
@@ -100,43 +132,47 @@ section {
                     <ul>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label text-left">邮箱：</label>
+                            <p class="Tipmsg" ng-bind="show.registEmailMsg" ng-show="!isStrIsTrue('email',registEmail)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registEmail"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <input type="text" class="form-control" id="" ng-model="registEmail">
-                                <i ng-hide="show.registEmailIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
-                                <i ng-show="show.registEmailIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                                <i ng-hide="isStrIsTrue('email',registEmail)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('email',registEmail)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label">昵称：</label>
+                            <p class="Tipmsg" ng-bind="show.registNicknameMsg" ng-show="!isStrIsTrue('nickname',registNickname)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registNickname"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <input type="text" class="form-control" id="" ng-model="registNickname">
-                                <i ng-hide="show.registNicknameIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
-                                <i ng-show="show.registNicknameIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                                <i ng-hide="isStrIsTrue('nickname',registNickname)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('nickname',registNickname)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label">密码：</label>
+                            <p class="Tipmsg" ng-bind="show.registPasswordMsg" ng-show="!isStrIsTrue('password',registPassword)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPassword"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <input type="text" class="form-control" id="" ng-model="registPassword">
-                                <i ng-hide="show.registPasswordIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
-                                <i ng-show="show.registPasswordIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                                <i ng-hide="isStrIsTrue('password',registPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('password',registPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label">确认密码：</label>
+                            <p class="Tipmsg" ng-bind="show.registPardenPasswordMsg" ng-show="!isStrIsTrue('pardenPassword',registPardenPassword)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPardenPassword"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <input type="text" class="form-control" id="" ng-model="registPardenPassword">
-                                <i ng-hide="show.registPardenPasswordIsTrue" class="icon-remove icon-2x" aria-hidden="true" style="color: #9a3939;"></i>
-                                <i ng-show="show.registPardenPasswordIsTrue" class="icon-ok icon-2x" aria-hidden="true" style="color: #418a41;"></i>
+                                <i ng-hide="isStrIsTrue('pardenPassword',registPardenPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('pardenPassword',registPardenPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
                         <li class="input-list row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="addRegist()">下一步</button>
+                                <button type="button" ng-disabled="!isStrIsTrue('all')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="addRegist()">下一步</button>
                             </div>
                         </li>
                     </ul>

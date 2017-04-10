@@ -24,3 +24,15 @@ angular.module('mapApp')
             })
         }
     })
+    .directive('outFocus',function(){
+        return function(scope,element,attrs){
+            element.bind({
+                mouseenter: function(e) {
+                    var that = this;
+                    var layerId = layer.tips(attrs.outFocus, that,{
+                        time:800
+                    }); //在元素的事件回调体中，follow直接赋予this即可
+                }
+            })
+        }
+    })
