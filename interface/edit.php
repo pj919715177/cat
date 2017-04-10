@@ -14,17 +14,14 @@ if(isset($_FILES['file'])) {
 	}
 }
 
+$id = $_POST['id'];
 $nickname = $_POST['nickname'];
 $email = $_POST['email'];
 $password = md5($_POST['password']);
 $signature = $_POST['signature'];
-$createTime = time();
-if($database->addUser($nickname, $email, $password, $path.$name, $signature, $createTime)) {
-	$json = ['code' => 1000, 'message' => '添加用户成功！'];
+if($database->editUser($id, $nickname, $email, $password, $path.$name, $signature)) {
+	$json = ['code' => 1000, 'message' => '修改用户成功！'];
 } else {
-	$json = ['code' => 1001, 'message' => '添加用户失败！'];
+	$json = ['code' => 1001, 'message' => '修改用户失败！'];
 }
 echo json_encode($json);die;
-
-
-
