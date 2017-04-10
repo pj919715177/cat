@@ -1,0 +1,42 @@
+[10-Apr-2017 09:16:13 UTC] PHP Notice:  Undefined variable: upload_file in /mnt/hgfs/virtual/cat/interface/addUser.php on line 24
+[10-Apr-2017 09:16:26 UTC] PHP Notice:  Undefined variable: upload_file in /mnt/hgfs/virtual/cat/interface/addUser.php on line 23
+[10-Apr-2017 09:19:38 UTC] PHP Warning:  move_uploaded_file(../file//tmp/phpu2Vgn5): failed to open stream: No such file or directory in /mnt/hgfs/virtual/cat/interface/addUser.php on line 23
+[10-Apr-2017 09:19:38 UTC] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpu2Vgn5' to '../file//tmp/phpu2Vgn5' in /mnt/hgfs/virtual/cat/interface/addUser.php on line 23
+[10-Apr-2017 09:19:57 UTC] PHP Warning:  move_uploaded_file(../file//tmp/phpCTJOoY): failed to open stream: No such file or directory in /mnt/hgfs/virtual/cat/interface/addUser.php on line 23
+[10-Apr-2017 09:19:57 UTC] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpCTJOoY' to '../file//tmp/phpCTJOoY' in /mnt/hgfs/virtual/cat/interface/addUser.php on line 23
+[10-Apr-2017 09:23:42 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No such file or directory in /mnt/hgfs/virtual/cat/class/database.php:20
+Stack trace:
+#0 /mnt/hgfs/virtual/cat/class/database.php(20): PDO->__construct('mysql:dbname=ca...', 'root', 'pj129620')
+#1 /mnt/hgfs/virtual/cat/class/database.php(25): database->__construct()
+#2 /mnt/hgfs/virtual/cat/interface/addUser.php(4): database::getDatabase()
+#3 {main}
+  thrown in /mnt/hgfs/virtual/cat/class/database.php on line 20
+[10-Apr-2017 09:24:07 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] No such file or directory in /mnt/hgfs/virtual/cat/class/database.php:20
+Stack trace:
+#0 /mnt/hgfs/virtual/cat/class/database.php(20): PDO->__construct('mysql:dbname=ca...', 'root', 'pj129620')
+#1 /mnt/hgfs/virtual/cat/class/database.php(25): database->__construct()
+#2 /mnt/hgfs/virtual/cat/interface/addUser.php(4): database::getDatabase()
+#3 {main}
+  thrown in /mnt/hgfs/virtual/cat/class/database.php on line 20
+[10-Apr-2017 09:26:26 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/addUser.php on line 20
+[10-Apr-2017 09:26:26 UTC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /mnt/hgfs/virtual/cat/class/database.php on line 42
+[10-Apr-2017 09:36:36 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/addUser.php on line 20
+[10-Apr-2017 09:36:36 UTC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /mnt/hgfs/virtual/cat/class/database.php on line 43
+[10-Apr-2017 09:41:12 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/addUser.php on line 20
+[10-Apr-2017 09:59:33 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/addUser.php on line 20
+[10-Apr-2017 10:15:15 UTC] PHP Warning:  PDOStatement::fetch() expects parameter 1 to be integer, object given in /mnt/hgfs/virtual/cat/class/database.php on line 78
+[10-Apr-2017 10:15:41 UTC] PHP Warning:  PDOStatement::fetch() expects parameter 1 to be integer, object given in /mnt/hgfs/virtual/cat/class/database.php on line 78
+[10-Apr-2017 10:15:53 UTC] PHP Warning:  PDOStatement::fetch() expects parameter 1 to be integer, object given in /mnt/hgfs/virtual/cat/class/database.php on line 78
+[10-Apr-2017 10:17:47 UTC] PHP Warning:  PDOStatement::fetch() expects parameter 1 to be integer, object given in /mnt/hgfs/virtual/cat/class/database.php on line 78
+[10-Apr-2017 10:39:52 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/addUser.php on line 20
+[10-Apr-2017 10:42:10 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 10:42:46 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 10:42:46 UTC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /mnt/hgfs/virtual/cat/class/database.php on line 94
+[10-Apr-2017 10:46:23 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 10:46:23 UTC] PHP Warning:  PDOStatement::execute(): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /mnt/hgfs/virtual/cat/class/database.php on line 78
+[10-Apr-2017 11:31:30 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 11:31:56 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 11:32:41 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 11:33:08 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 11:33:25 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21
+[10-Apr-2017 11:33:48 UTC] PHP Notice:  Undefined index: signature in /mnt/hgfs/virtual/cat/interface/edit.php on line 21

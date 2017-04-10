@@ -12,7 +12,7 @@ class database
 
 	private function __construct() {
 		$this->engine = 'mysql';
-		$this->host = 'localhost';
+		$this->host = '127.0.0.1';
 		$this->database = 'cat';
 		$this->user = 'root';
 		$this->pass = 'pj129620';
@@ -29,35 +29,61 @@ class database
 	
 	public function addUser($nickname, $email, $password, $imgUrl, $signature, $createTime)
 	{
-		$sql = 'INSERT INTO user(nickname,email,password,imgUrl,signature,createTime) VALUES(":nickname",":email",":password",":imgUrl",":signature",:createTime)';
+		$sql = "INSERT INTO user(nickname,email,password,imgUrl,signature,createTime) VALUES(\"{$nickname}\",\"{$email}\",\"{$password}\",\"{$imgUrl}\",\"{$signature}\",{$createTime})";
 		$statement = $this->pdo->prepare($sql);
-		$params = [
-			':nickname' => $nickname,
-			':email' => $email,
-			':password' => $password,
-			':imgUrl' => $imgUrl,
-			':signature' => $signature,
-			':createTime' => $createTime,
-		];
-		$result = $statement->execute($params);
+//		$params = [
+//			':nickname' => $nickname,
+//			':email' => $email,
+//			':password' => $password,
+//			':imgUrl' => $imgUrl,
+//			':signature' => $signature,
+//			':createTime' => $createTime,
+//		];
+		$result = $statement->execute();
 		return $result;
 	}
 
 	public function checkUser($email, $password)
 	{
-		$sql = 'SELECT * from user WHERE email=":email" AND password=":password"';
+		$sql = "SELECT id from user WHERE email=\"{$email}\" AND password=\"{$password}\"";
 		$statement = $this->pdo->prepare($sql);
-		$params = [':email' => $email, ':password' => $password];
-		$result = $statement->execute($params);
+//		$params = [':email' => $email, ':password' => $password];
+		$statement->execute();
+		$result = $statement->fetch();
 		return $result;
 	}
 
-	public function getUser($email)
+	public function getUser($id)
 	{
-		$sql = 'SELECT * from user WHERE email=":email"';
+		$sql = "SELECT * from user WHERE id=:id";
 		$statement = $this->pdo->prepare($sql);
-		$params = [':email' => $email];
-		$result = $statement->execute($params);
+		$params = [':id' => $id];
+		$statement->execute($params);
+		$result = $statement->fetch();
+		return $result;
+	}
+	
+	public function editUser($id, $nickname, $email, $password, $imgUrl, $signature)
+	{
+		$sql = "UPDATE user SET nickname=\"{$nickname}\",email=\"{$email}\",password=\"{$password}\",imgUrl=\"{$imgUrl}\",signature=\"{$signature}\" WHERE id=\"{$id}\"";
+		$statement = $this->pdo->prepare($sql);
+//		$params = [
+//			':nickname' => $nickname,
+//			':email' => $email,
+//			':password' => $password,
+//			':imgUrl' => $imgUrl,
+//			':signature' => $signature,
+//			':id' => $id,
+//		];
+		$result = $statement->execute();
+		return $result;
+	}
+
+	public function deleteUser($id)
+	{
+		$sql = "DELETE FROM user WHERE id={$id}";
+		$statement = $this->pdo->prepare($sql);
+		$result  = $statement->execute();
 		return $result;
 	}
 }
