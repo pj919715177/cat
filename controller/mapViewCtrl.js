@@ -8,6 +8,7 @@ angular.module('mapApp').controller('mapViewCtrl',['$scope','mapService',functio
 	}
 	$scope.show.openUserBombFlag = false;//是否显示user基础信息弹框
 	$scope.activityAllList = new Array();
+	$scope.userDetail = null;
 
 	var me = this;
 
@@ -139,13 +140,54 @@ angular.module('mapApp').controller('mapViewCtrl',['$scope','mapService',functio
 				}
 			}
 		}
-
+	}
+	//打开登陆窗口
+	$scope.openLoginBlock = function(){
+		var windowWidth = document.body.clientWidth;
+		var layerAres = 'auto';
+		var closeBtn = 1;
+		if(windowWidth <= 320){  //不可能
+			var layerAres = ['' + windowWidth + 'px'];
+			var closeBtn = 0;
+		}else if(windowWidth > 320 && windowWidth <= 767){  //手机屏幕
+			var layerAres = ['' + windowWidth + 'px'];
+			var closeBtn = 0;
+		}else if (windowWidth > 767 && windowWidth <= 992){ //平板屏幕
+			var layerAres = ['' + 400 + 'px'];
+			var closeBtn = 1;
+		}else if(windowWidth > 992 && windowWidth <= 1200){ //小的电脑
+			var layerAres = ['' + 400 + 'px'];
+			var closeBtn = 1;
+		}else if(windowWidth >1200){ //大屏电脑
+			var layerAres = ['' + 400 + 'px'];
+			var closeBtn = 1;
+		}
+		$scope.loginLayer = layer.open({
+			type:1,
+			title:false,
+			area: layerAres,
+			closeBtn : closeBtn,
+			shadeClose: true,
+			content:$('#loginBlock')
+		})
+	}
+	//提交登陆信息
+	$scope.login = function(){
+		var loginRe = mapService.login($scope.loginUserEmail,$scope.loginUserPassword);
+		if(loginRe === '0'){  //成功
+			$scope.show.loginMsg = '';
+			$scope.userDetail.userEmail = $scope.loginUserEmail;
+		}else if(loginRe === '1'){
+			$scope.show.loginMsg = '用户名或密码错误，请重新登陆';
+		}else{
+			$scope.show.loginMsg = '登陆失败';
+		}
 	}
 	//关闭活动弹窗
-	$scope.closeActivityList = function(){
-		if($scope.activityListLayer){
-			layer.close($scope.activityListLayer);
-			$scope.activityListLayer = null;
+	$scope.closeLayer = function(layerI){
+		if(layerI){
+			layer.close(layerI);
+			// $scope.activityListLayer = null;
 		}
 	}
 	//添加聚集
@@ -197,4 +239,7 @@ angular.module('mapApp').controller('mapViewCtrl',['$scope','mapService',functio
 	// 		})
 	// 	})
 	// }
+	//*************************************滑动验证-start****************************************************************
+
+	//*************************************滑动验证-end****************************************************************
 }])

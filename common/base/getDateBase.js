@@ -96,13 +96,36 @@
             });
             return re;
         }
+        //登陆
+        var login = function(userEmail,password){
+            var re = null;
+            $.ajax({
+                url: './interface/login.php',
+                type: 'POST',
+                data:{
+                    email : userEmail,
+                    password : password
+                },
+                dataType: 'JSON',
+                async: false,
+                success: function(data) {
+                    re = data;
+                    console.log(re);
+                },
+                error: function() {
+                    console.log('login--DateBase获取失败');
+                }
+            })
+            return re;
+        }
 
         return {
             getAllCatData: getAllCatData,
             getAllPeriodical: getAllPeriodical,
             getUserRec: getUserRec,
             getActivityRecData: getActivityRecData,
-            getApplicantListByActivityID: getApplicantListByActivityID
+            getApplicantListByActivityID: getApplicantListByActivityID,
+            login: login
         }
 
     }])

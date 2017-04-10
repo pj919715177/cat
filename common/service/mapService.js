@@ -46,11 +46,27 @@
                         return '获取活动参与者信息失败'
                     }
                 }
+                //登陆
+                var login = function(userEmail,password){
+                    var re = getDateBaseFactory.login(userEmail,password);
+                    if(re){
+                        if(re == '登录成功！'){
+                            return '0';
+                        }else if(re == '用户名或密码错误！'){
+                            return '1';
+                        }else{
+                            return '2';
+                        }
+                    }else{
+                        return '2';
+                    }
+                }
 
                 this.getAllCatData = getAllCatData;
                 this.createMap = createMap;
                 this.getActivityData = getActivityData;
                 this.getApplicantListByActivityID = getApplicantListByActivityID;
+                this.login = login;
 
             }])
 

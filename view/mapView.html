@@ -31,6 +31,42 @@
             </div>
         </div>
         <div>
+            <!-- 登陆弹框 -->
+            <div id="loginBlock" class="loginBlock" style="display: none">
+                <i style="color: #fff;margin: 5px;" class="icon-angle-left icon-2x pull-left ACLIgoback" ng-click="closeLayer(loginLayer);loginLayer=null;"></i>
+                <div class="login-head">
+                    <span>Welcome</span>
+                </div>
+                <div class="login-content">
+                    <p style="color: #d80000;" ng-bind="show.loginMsg"></p>
+                    <ul>
+                        <li class="login-userEmail">
+                            <i class="icon-user icon-2x pull-left"></i>
+                            <input type="text" ng-model="loginUserEmail" placeholder="用户邮箱"></input>
+                        </li>
+                        <li class="login-userPassword">
+                            <i class="icon-lock icon-2x pull-left"></i>
+                            <input type="text" ng-model="loginUserPassword" placeholder="用户密码"></input>
+                        </li>
+                        <li class="login-validate">
+<!--                             <div class="stage">
+                                <div class="slider" id="slider">
+                                    <div class="label">向右滑动验证</div>
+                                    <div class="track" id="track">
+                                        <div class="bg-green"></div>
+                                    </div>
+                                    <div class="login-slider-button" id="btn">
+                                        <div class="icon" id="icon"></div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </li>
+                        <li class="login-login">
+                            <button type="button" ng-click="login()" class="btn btn-primary btn-lg" style="width:100%">登陆</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <!--发布活动弹框-->
             <div class="addActive" style="display: none" id="addActive">
                 <div class="add-activity-head">
@@ -76,8 +112,11 @@
                 <ul class="user-bomb-ul">
                     <li class="user-bomb-head">
                         <i class="icon-user icon-2x float-left" ng-click=""></i>
-                        <span class=" float-left">userName</span>
-                        <i class="icon-edit float-right"></i>
+                        <span ng-show="userDetail.userID" class=" float-left">{{userDetail.userName}}</span>
+                        <span ng-show="!userDetail.userID" class=" float-left">
+                            <a href="" ng-click="openLoginBlock()">登陆</a>/
+                            <a href="" ui-sref="regist">注册</a></span>
+                        <i  ng-show="userDetail.userID" class="icon-edit float-right"></i>
                     </li>
                     <li class="user-bomb-content" ng-click="openActivityList()">
                         <i class="icon-road"></i>
@@ -101,7 +140,7 @@
             <!--最新活动查看弹框-->
             <div class="activity-bomb" style="display: none" id="activityBomb">
                 <div class="activity-bomb-head">
-                    <i class="icon-angle-left icon-2x pull-left ACLIgoback" ng-click="closeActivityList()"></i>
+                    <i class="icon-angle-left icon-2x pull-left ACLIgoback" ng-click="closeLayer(activityListLayer);activityListLayer=null;"></i>
                     <span>全站活动</span>
                     <div class="search-block">
                         <input type="text" />

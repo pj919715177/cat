@@ -57,6 +57,24 @@ define(
                         }]
                     }
                 })
+                .state('editUser', {
+                    url: '/editUser',
+                    views: {
+                        'mainContent': {
+                            templateUrl: './view/editUser.html',
+                            controller: 'editUserCtrl',
+                        }
+                    },
+                    resolve: {
+                        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                './controller/editUserCtrl.js',
+                                // './common/service/otherService.js',
+                                './common/base/getDateBase.js',
+                            ]);
+                        }]
+                    }
+                })
             
         })
 

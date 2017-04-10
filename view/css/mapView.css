@@ -1,4 +1,11 @@
-
+a:focus, a:hover{
+    text-decoration: none;
+}
+ul,li{
+    padding: 0px;
+    margin:0px;
+    list-style: none;
+}
 .full-view{
     width:100%;
     height:100%;
@@ -173,13 +180,19 @@
 }
 .user-bomb-head:hover {
     color: #fff;
-    cursor: pointer;
 }
 .user-bomb-head i{
     line-height:40px;
 }
 .user-bomb-head span{
     margin-left: 15px;
+    font-size: 18px;
+}
+.user-bomb-head a{
+    color: #fff;
+}
+.user-bomb-head a :hover{
+    color: #ffe6e6;
 }
 .user-bomb-content {
     padding: 5px 20px;
@@ -199,6 +212,50 @@
 .user-bomb-content i {
     font-size: 20px;
 }
+/*****************************************************************登陆弹框-start**********************************************************/
+.login-head {
+    background: #1f68a9;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: #fff;
+    font-size: 30px;
+}
+.login-content {
+    padding: 20px;
+}
+.login-content li {
+    list-style: none;
+    margin-bottom: 15px;
+}
+.login-content i {
+    position: absolute;
+    margin: 5px 13px;
+    color: #7d7d7d;
+}
+.login-content input {
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0px;
+    border-bottom: 1px solid #585858;
+    padding-left: 20%;
+    font-size: 18px;
+}
+.login-content input {
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0px;
+    border-bottom: 1px solid #585858;
+    padding-left: 20%;
+    font-size: 18px;
+}
+.login-content input:focus{
+    outline: 0px;
+    border-bottom: 1px solid #5cb2ff;
+}
+/*****************************************************************登陆弹框-end**********************************************************/
 /******************************************************************活动列表弹框-star*******************************************************/
 .activity-bomb {
     background-color: white;
@@ -280,6 +337,9 @@
     }
     .activity-bomb-content {
         height: 85vh;
+    }
+    .loginBlock{
+        height: 100vh;
     }
 }
 @media (min-width: 767px) and (max-width:992px) {
