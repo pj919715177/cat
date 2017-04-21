@@ -3,10 +3,11 @@ include_once('../class/database.php');
 
 $database = database::getDatabase();
 
-$id = $_POST['id'];
+$email = $_POST['email'];
 //$id = 1;
-if($data = $database->getUser($id)) {
+if($data = $database->getUserByEmail($email)) {
 	$json = ['code' => 1000, 'data' => [
+		'id' => $data['id'],
 		'nickname' => $data['nickname'],
 		'email' => $data['email'],
 		'password' => $data['password'],

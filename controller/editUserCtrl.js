@@ -3,10 +3,20 @@
  */
 var module = angular.module('mapApp');
 
-module.controller('registCtrl',['$scope','$ocLazyLoad','$http',function($scope,$ocLazyLoad,$http){
+module.controller('editUserCtrl',['$scope','$ocLazyLoad','$http','mapService',function($scope,$ocLazyLoad,$http,mapService){
     $scope.show = {}
-    $scope.show.schedule = 'base';
     $scope.canSubFlag = false;
+    $scope.show.editPassword = false;
+
+    mapService.isLogin(function(re){
+      if(re === '1'){        //不可能
+        $scope.userDetail = null;
+        $scope.isLogin = false;
+      }else{
+        $scope.userDetail = re.data;
+        $scope.isLogin = true;
+      }
+    })
 
     var msg = {
         registEmailMsg : [
@@ -29,34 +39,34 @@ module.controller('registCtrl',['$scope','$ocLazyLoad','$http',function($scope,$
     };
 
     //图片上传
-    $scope.fileChanged = function(ele){  
-        $scope.files = ele.files;  
-        $scope.$apply();  
+    $scope.upToSpare = function(ele){  
+        console.log($(ele)[0].id) ;
+        $.ajaxFileUpload({
+            url: './interface/ImgCtrl.php?opt=addToSpare', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: $(ele)[0].id, //文件上传域的ID
+            dataType: 'json', //返回值类型 一般设置为json
+            data:{
+                fileName: $(ele)[0].id
+            },
+            success: function (data)  //服务器成功响应处理函数
+            {
+                if(data.re === 0){
+                    $scope.userDetail.imgUrl = './file/spare/'+data.data;
+                    $scope.newImgName = data.data;
+                    $scope.$apply();
+                }else{
+                    $scope.userDetail.imgUrl = './file/addNewImg.jpg';
+                    $scope.$apply();
+                }
+            },
+            error: function (data, status, e)//服务器响应失败处理函数
+            {
+                console.log(e);
+            }
+        }) 
     } 
-    //注册基础信息提交
-    $scope.addRegist = function(){
-            $scope.show.schedule = 'detail';
-          // $http({  
-          //    method:'post',  
-          //    url:'./interface/addUser.php',  
-          //    data:{
-          //       nickname:$scope.registEmail,
-          //       email:$scope.registNickname,
-          //       password:$scope.registPassword,
-          //    },  
-          //    headers:{'Content-Type': 'application/x-www-form-urlencoded'},  
-          //    transformRequest: function(obj) {  
-          //      var str = [];  
-          //      for(var p in obj){  
-          //        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
-          //      }  
-          //      return str.join("&");  
-          //    }  
-          // }).success(function(req){  
-          //        console.log(req);   
-          // })
-    }
-    $scope.upUserDetail = function(){
+    $scope.editUserDetail = function(){
         var pushFail = null;
         if($scope.files){
             console.log($scope.files);  
@@ -64,82 +74,136 @@ module.controller('registCtrl',['$scope','$ocLazyLoad','$http',function($scope,$
         }else{
             console.log('no files')
         }
-        console.log('signature='+$scope.signature);
-        console.log('nickname='+$scope.registNickname+'--email='+$scope.registEmail+'--pass='+$scope.registPassword); 
-        $http({  
-            method:'post',  
-            url:'./interface/addUser.php',  
-            data:{
-                nickname:$scope.registEmail,
-                email:$scope.registNickname,
-                password:$scope.registPassword,
-                imgUrl:pushFail,
-                signature:$scope.signature
-           },  
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'},  
-            transformRequest: function(obj) {  
-                var str = [];  
-                for(var p in obj){  
-                  str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));  
-                }  
-                return str.join("&");  
-           }  
-        }).success(function(req){  
-               console.log(req);   
-               $scope.show.schedule = 'finish';
-        })
+
+        if(!$scope.userDetail.id){
+          $scope.userDetail.id = '';
+        }
+        if(!$scope.userDetail.nickname){
+          $scope.userDetail.nickname = '';
+        }
+        if(!$scope.userDetail.email){
+          $scope.userDetail.email = '';
+        }
+        if(!$scope.editOldPassword){
+          $scope.editNewPassword = '';
+        }
+        if(!$scope.userDetail.nickname){
+          $scope.userDetail.nickname = '';
+        }
+        if(!$scope.userDetail.signature){
+          $scope.userDetail.signature = '';
+        }
+        if(!$scope.newImgName){
+          $scope.newImgName = $scope.userDetail.imgUrl.substring(12);
+        }
+
+        mapService.editUserDetail($scope.userDetail.id,
+          $scope.userDetail.nickname,
+          $scope.userDetail.email,
+          $scope.editOldPassword,
+          $scope.editNewPassword,
+          $scope.userDetail.signature,
+          $scope.newImgName,
+          function(re){
+            if(re.reUserDetail){
+              if(re.reUserDetail.code === 1000){
+                if(re.rePassword.code === 1000){
+                  layer.msg('修改密码与用户信息成功');
+                }else if(re.rePassword.code === 1001){
+                  layer.msg('修改用户信息成功,修改密码失败！')
+                }else if(re.rePassword.code === 1002){
+                  layer.msg('修改用户信息成功,修改密码失败！旧密码填写错误！')
+                }
+              }else{
+                if(re.rePassword.code === 1000){
+                  layer.msg('修改密码成功，修改用户信息失败');
+                }else if(re.rePassword.code === 1001){
+                  layer.msg('修改用户信息失败,修改密码失败！')
+                }else if(re.rePassword.code === 1002){
+                  layer.msg('修改用户信息失败,修改密码失败！旧密码填写错误！')
+                }
+              }
+            }else{
+              if(re.code === 1000){
+                  layer.msg('修改用户信息成功');
+              }else{
+                  layer.msg('修改用户信息失败');
+              }
+            }
+            $scope.userDetail = mapService.getUserByEmail($scope.userDetail.email).data;
+          }
+        );
     }
     $scope.isStrIsTrue = function(type,str){
         switch(type){
             case 'email':
                 if(!str){
-                    $scope.show.registEmailMsg = msg.registEmailMsg[0];
+                    $scope.show.editEmailMsg = msg.registEmailMsg[0];
                     return false;
                 }else if(!isEmail(str)){
-                    $scope.show.registEmailMsg = msg.registEmailMsg[1];
+                    $scope.show.editEmailMsg = msg.registEmailMsg[1];
                     return false;
                 }else{
-                    $scope.show.registEmailMsg = '';
+                    $scope.show.editEmailMsg = '';
                     return true;
                 }
                 // break;
             case 'nickname':
                 if(!str){
-                    $scope.show.registNicknameMsg = msg.registNicknameMsg[0];
+                    $scope.show.editNicknameMsg = msg.registNicknameMsg[0];
                     return false;
                 }else{
-                    $scope.show.registNicknameMsg = '';
+                    $scope.show.editNicknameMsg = '';
                     return true;
                 }
                 // break;
-            case 'password':
+            case 'oldPassword':
                 if(!str){
-                    $scope.show.registPasswordMsg = msg.registPasswordMsg[0];
+                    $scope.show.editOldPasswordMsg = msg.registPasswordMsg[0];
                     return false;
                 }else if(!isPassword(str)){
-                    $scope.show.registPasswordMsg = msg.registPasswordMsg[1];
+                    $scope.show.editOldPasswordMsg = msg.registPasswordMsg[1];
                     return false;
                 }else{
-                    $scope.show.registPasswordMsg = '';
+                    $scope.show.editOldPasswordMsg = '';
+                    return true;
+                }
+                // break;
+            case 'newPassword':
+                if(!str){
+                    $scope.show.editNewPasswordMsg = msg.registPasswordMsg[0];
+                    return false;
+                }else if(!isPassword(str)){
+                    $scope.show.editNewPasswordMsg = msg.registPasswordMsg[1];
+                    return false;
+                }else{
+                    $scope.show.editNewPasswordMsg = '';
                     return true;
                 }
                 // break;
             case 'pardenPassword':
-                if(!(str === $scope.registPassword)){
-                    $scope.show.registPardenPasswordMsg = msg.registPardenPasswordMsg[1];
+                if(!(str === $scope.editNewPassword)){
+                    $scope.show.editNewPardenPasswordMsg = msg.registPardenPasswordMsg[1];
                     return false;
                 }else{
                     return true;
                 }
                 // break;
             case 'all':
-                if($scope.isStrIsTrue('email',$scope.registEmail) && $scope.isStrIsTrue('nickname',$scope.registNickname)
-                     && $scope.isStrIsTrue('password',$scope.registPassword) 
-                     && $scope.isStrIsTrue('pardenPassword',$scope.registPardenPassword)){
-                        return true;
-                }else{
-                    return false;
+                if($scope.show.editPassword === true){
+                  if($scope.isStrIsTrue('nickname',$scope.userDetail.nickname) && $scope.isStrIsTrue('oldPassword',$scope.editOldPassword) && $scope.isStrIsTrue('newPassword',$scope.editNewPassword) && $scope.isStrIsTrue('pardenPassword',$scope.editNewPardenPassword)){
+                          return true;
+                  }else{
+                      return false;
+                  }
+                }else if($scope.show.editPassword === false){
+                  if($scope.isStrIsTrue('nickname',$scope.userDetail.nickname)){
+                          return true;
+                  }else{
+                      return false;
+                  }
                 }
+
                 // break;
             default:
                 return false;

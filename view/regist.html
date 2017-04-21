@@ -60,6 +60,21 @@ section {
     right: 25px;
     margin-top: -15px;
 }
+.input-list>div{
+    position: relative;
+}
+.input-list-img img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px dotted #737373;
+}
+.input-list-img input{
+    position: absolute;
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+}
 .sub-btn {
     width: 100%;
     margin-top: 25px;
@@ -195,12 +210,11 @@ section {
             <div class="regist-detail-form">
                 <form>
                     <ul>
-                        <li class="input-list row"> 
-                            <lable for="registHeadUrl" class="col-md-3 col-sm-3 col-xs-12 control-label text-left">
-                                <!-- <img ng-src={{files[0].name}} /> -->
-                            </lable>
+                        <li class="input-list input-list-img row"> 
+                            <label for="registHeadUrl" class="col-md-3 col-sm-3 col-xs-12 control-label text-left">用户头像：</label>
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <input type="file" id="registHeadUrl" onchange='angular.element(this).scope().fileChanged(this)' /></input>
+                                <input type="file" id="registHeadUrl" name="registHeadUrl" onchange='angular.element(this).scope().upToSpare(this)' /></input>
+                                <img src="{{registHeadImgUrl}}"/>
                             </div>
                         </li>
                         <li class="input-list row">

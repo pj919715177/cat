@@ -38,7 +38,7 @@
                     <span>Welcome</span>
                 </div>
                 <div class="login-content">
-                    <p style="color: #d80000;" ng-bind="show.loginMsg"></p>
+                    <p style="color: #d80000;position: absolute;top: 3px;" ng-bind="show.loginMsg"></p>
                     <ul>
                         <li class="login-userEmail">
                             <i class="icon-user icon-2x pull-left"></i>
@@ -69,60 +69,181 @@
             </div>
             <!--发布活动弹框-->
             <div class="addActive" style="display: none" id="addActive">
+            <div class="addActive-in">
                 <div class="add-activity-head">
-                    发布活动
+                    <i style="margin-top:-10px" class="icon-angle-left icon-2x pull-left ACLIgoback" ng-click="closeLayer(addActivityFormLayer);addActivityFormLayer=null;"></i>
+                    <span>发布活动</span>
                 </div>
                 <table class="add-activity-form">
                     <tr>
                         <td class="add-activity-table-left">活动名</td>
-                        <td><input type="text" ng-model="activity.name" placeholder="活动名称"/></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.activityName" placeholder=""/></td>
                     </tr>
                     <tr>
                         <td class="add-activity-table-left"><span class="table-left">发起者</span></td>
-                        <td>匿名（<a>登陆</a>）</td>
+                        <td class="add-activity-table-right">
+                            <span ng-show="isLogin">{{userDetail.nickname}}</span>
+                            <span ng-show="!isLogin">
+                                <a href="" ng-click="openLoginBlock()">登陆</a>/
+                                <a href="" ui-sref="regist">注册</a>
+                            </span>
+                        </td>
                     </tr>
                     <tr>
                         <td class="add-activity-table-left"><span class="table-left">活动时间</span></td>
-                        <td>
-                            <input class="time-input" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})" ng-model="activity.startTime"/>到
-                            <input class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" ng-model="activity.endTime"/>
+                        <td class="add-activity-table-right">
+                            <input id="addActivity-startTime" class="time-input" type="text" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="addActivity-endTime" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">报名时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="addActivity-applyStartTime" class="time-input" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="addActivity-applyEndTime" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
                         </td>
                     </tr>
                     <tr>
                         <td class="add-activity-table-left"><span class="table-left">活动地点</span></td>
-                        <td><input type="text" ng-model="activity.address"/></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.location"/></td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">信息发布范围</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.msgAddress"/></td>
                     </tr>
                     <tr>
                         <td class="add-activity-table-left"><span class="table-left">封面图</span></td>
-                        <td><input type="text" ng-model="activity.img"/></td>
+                        <td class="add-activity-table-right add-activity-table-right-img">
+                            <div class="" style="position: relative;">
+                                <input type="file" id="registHeadUrl" class="registHeadUrl" name="registHeadUrl" onchange="angular.element(this).scope().upToSpare(this,'activity')" /></input>
+                                <img ng-src="{{addActivity.coverImg}}"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动简介</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.introduce"/></td>
                     </tr>
                     <tr style="border-bottom: 0px;">
                         <td class="add-activity-table-left"><span class="table-left">活动详情</span></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="padding: 0px 0px 5px 0px;">
-                            <textarea ng-model="activity.detail">
+                            <textarea ng-model="addActivity.theme">
                             </textarea>
                         </td>
                     </tr>
+                    <tr  style="border-bottom: 0px;">
+                        <td class="add-activity-table-left"><span class="table-left">添加图片</span></td>
+                    </tr>
+                    <tr style="border-bottom: 0px;">
+                        <td colspan="2" class="add-activity-table-moreImg"  style="padding:5px;">
+                            <div ng-repeat="addActivityImg in addActivity.ImgList" class="activity-moreImg" style="position: relative;background-image: url({{addActivityImg.imgUrl}})">
+                            </div>
+                            <div class="activity-moreImg" style="position: relative;width: 80px;height: 80px;">
+                                <input type="file" id="addActivityImgList" class="registHeadUrl" name="addActivityImgList" onchange="angular.element(this).scope().upToSpare(this,'activityImgList')" /></input>
+                                <div class="activity-moreImg" style="background-image: url(./file/addNewImg.jpg)"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" style="width: 70%;height: 20px;font-size: 15px;line-height: 0;" ng-disabled="!checkActivity('all')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="inputAddActivity('mobile')">提交</button>
+                        </td>
+                    </tr>
                 </table>
+
+                <table class="add-activity-form-pc">
+                    <tr>
+                        <td class="add-activity-table-left">活动名</td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.activityName" placeholder=""/></td>
+
+                        <td rowspan="2" class="add-activity-table-left"><span class="table-left">封面图</span></td>
+                        <td rowspan="2" class="add-activity-table-right add-activity-table-right-img">
+                            <div class="" style="position: relative;">
+                                <input type="file" id="registHeadUrlPC" class="registHeadUrl" name="registHeadUrlPC" onchange="angular.element(this).scope().upToSpare(this,'activity')" /></input>
+                                <img ng-src="{{addActivity.coverImg}}"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">发起者</span></td>
+                        <td class="add-activity-table-right">
+                            <span ng-show="isLogin">{{userDetail.nickname}}</span>
+                            <span ng-show="!isLogin">
+                                <a href="" ng-click="openLoginBlock()">登陆</a>/
+                                <a href="" ui-sref="regist">注册</a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="addActivity-startTime-pc" class="time-input" type="text" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="addActivity-endTime-pc" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                        </td>
+
+                        <td class="add-activity-table-left"><span class="table-left">报名时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="addActivity-applyStartTime-pc" class="time-input" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="addActivity-applyEndTime-pc" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class="add-activity-table-left"><span class="table-left">活动地点</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.location"/></td>
+                        <td class="add-activity-table-left"><span class="table-left">信息发布范围</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="addActivity.msgAddress"/></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动简介</span></td>
+                        <td colspan="3" class="add-activity-table-right"><input type="text" style="width: 100%" ng-model="addActivity.introduce"/></td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动详情</span></td>
+
+                        <td colspan="3" style="padding: 0px 0px 5px 0px;">
+                            <textarea ng-model="addActivity.theme">
+                            </textarea>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 0px;">
+                        <td class="add-activity-table-left"><span class="table-left">添加图片</span></td>
+                        <td colspan="3" class="add-activity-table-moreImg"  style="padding:5px;">
+                            <div ng-repeat="addActivityImg in addActivity.ImgList" class="activity-moreImg" style="position: relative;background-image: url({{addActivityImg.imgUrl}})">
+                            </div>
+                            <div class="activity-moreImg" style="position: relative;width: 80px;height: 80px;">
+                                <input type="file" id="addActivityImgListPC" class="registHeadUrl" name="addActivityImgListPC" onchange="angular.element(this).scope().upToSpare(this,'activityImgList')" /></input>
+                                <div class="activity-moreImg" style="background-image: url(./file/addNewImg.jpg)"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <button type="button" style="width: 70%;height: 20px;font-size: 15px;line-height: 0;" ng-disabled="!checkActivity('all')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="inputAddActivity('pc')">提交</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             </div>
             <!--用户信息弹框-->
             <div class="user-bomb" id="userBomb" ng-show="show.openUserBombFlag">
                 <ul class="user-bomb-ul">
                     <li class="user-bomb-head">
-                        <i class="icon-user icon-2x float-left" ng-click=""></i>
-                        <span ng-show="userDetail.userID" class=" float-left">{{userDetail.userName}}</span>
-                        <span ng-show="!userDetail.userID" class=" float-left">
+                        <img ng-src="{{userDetail.imgUrl?userDetail.imgUrl:'./file/user/defineUserImg.jpg'}}"/>
+                        <span ng-show="isLogin" class=" float-left">{{userDetail.nickname}}</span>
+                        <span ng-show="!isLogin" class=" float-left">
                             <a href="" ng-click="openLoginBlock()">登陆</a>/
                             <a href="" ui-sref="regist">注册</a></span>
-                        <i  ng-show="userDetail.userID" class="icon-edit float-right"></i>
+                        <a href="" ui-sref="editUser"><i  ng-show="isLogin" class="icon-edit float-right"></i></a>
                     </li>
                     <li class="user-bomb-content" ng-click="openActivityList()">
                         <i class="icon-road"></i>
                         <span>最新活动</span>
                     </li>
-                    <li class="user-bomb-content">
+                    <li class="user-bomb-content" ng-click="openMyActivityList()">
                         <i class="icon-calendar"></i>
                         <span>我的活动</span>
                     </li>
@@ -130,7 +251,7 @@
                         <i class="icon-group"></i>
                         <span>好友动态</span>
                     </li>
-                    <li class="user-bomb-content">
+                    <li class="user-bomb-content" ng-click="logout()">
                         <i class="icon-off"></i>
                         <span>退出登陆</span>
                     </li>
@@ -152,36 +273,41 @@
                         <li ng-repeat="activity in activityAllList">
                             <div style="padding: 10px;">
                                 <div class="activity-head">
-                                    <img src=""
-                                    <span class="activyty-name">{{activity.name}}</span><br/>
-                                    <span class="activity-address">地点：{{activity.address}}</span>
-                                    <button class="blue-btn activity-right-top">报名</button>
-                                    <span class="activity-right-top" ng-click="getApplicantList(activity.id,activity.applicantListShow)">已有n人报名</span>
+                                    <img ng-src="{{activity.coverImg}}"/>
+                                    <div class="activity-head-left">
+                                        <span class="activyty-name">{{activity.activityName}}</span>
+                                        <span class="activity-address">地点：{{activity.location}}</span>
+                                    </div>
+                                    <div class="activity-head-right">
+                                        <button class="activity-canjia-btn">报名</button>
+                                        <span class="activity-right-baoming" ng-click="getApplicantList(activity.id,activity.applicantListShow,'all')">已有n人报名</span>
+                                    </div>
                                 </div>
                                 <div class="applicant-block" ng-show="activity.applicantListShow">
                                     <ul>
                                         <li ng-repeat="applicant in activity.applicantList">
-                                            a
+                                            <img ng-src="./file/user/defineUserImg.jpg"/>
                                         </li>
                                         <li>
-                                            <button class="blue-btn">报名</button>
+                                            <button class="activity-canjia-btn">报名</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="activity-content">
                                     <div class="activity-out-show">
-                                        <img ng-src="{{activity.imgUrl}}" class="activity-img"/>
+                                        <span class="activity-introduce">{{activity.introduce}}</span>
+                                        <!-- <img ng-src="{{activity.imgUrl}}" class="activity-img"/> -->
                                         <p>
                                             活动时间：{{activity.startTime}}到{{activity.endTime}}<br/>
-                                            活动地点：{{activity.address}}<br/>
-                                            活动发布人：{{activity.promulgator}}<br/>
-                                            报名截止时间：{{activity.deafLine}}<br/>
+                                            报名时间：{{activity.applyStartTime}}到{{activity.applyEndTime}}<br/>
+                                            活动地点：{{activity.location}}<br/>
+                                            活动发布人：{{activity.host_email}}
                                         </p>
                                         <span class="activity-detail" ng-click="activity.discriptShow = !activity.discriptShow">详情</span>
                                     </div>
                                     <div class="activity-detail-slice" ng-show="activity.discriptShow">
                                         <p>
-                                            活动详情：{{activity.discript}}
+                                            活动详情：{{activity.theme}}
                                         </p>
                                     </div>
                                 </div>
@@ -189,6 +315,214 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <!--我的活动查看弹框-->
+            <div class="activity-bomb" style="display: none" id="myactivityBomb">
+                <div class="activity-bomb-head">
+                    <i class="icon-angle-left icon-2x pull-left ACLIgoback" ng-click="closeLayer(myactivityListLayer);myactivityListLayer=null;"></i>
+                    <span>我的活动</span>
+                    <div class="myactivity-select-block">
+                        <div ng-click="showMyactivityIntroduceList()" ng-class="{true:'myactivity-selected',false:''}[show.myactivityList == 'introduce']" class="myactivity-select">发布的活动</div>
+                        <div ng-click="showMyactivityPartList()" ng-class="{true:'myactivity-selected',false:''}[show.myactivityList == 'part']" class="myactivity-select">参与的活动</div>
+                    </div>
+                </div>
+                <div class="activity-bomb-content">
+                    <ul>
+                        <li ng-repeat="myactivity in myactivityList">
+                            <div style="padding: 10px;">
+                                <div class="activity-head">
+                                    <img ng-src="{{myactivity.coverImg}}"/>
+                                    <div class="activity-head-left">
+                                        <span class="activyty-name">{{myactivity.activityName}}</span>
+                                        <span class="activity-address">地点：{{myactivity.location}}</span>
+                                    </div>
+                                    <div class="activity-head-right">
+                                        <button class="activity-canjia-btn" ng-click="openEditActivity(myactivity.id)">编辑</button>
+                                        <button class="activity-canjia-btn" ng-click="delActivity(myactivity.id)">删除</button>
+                                        <span class="activity-right-baoming" ng-click="getApplicantList(myactivity.id,myactivity.applicantListShow,'myIntroduce')">已有n人报名</span>
+                                    </div>
+                                </div>
+                                <div class="applicant-block" ng-show="myactivity.applicantListShow">
+                                    <ul>
+                                        <li ng-repeat="applicant in activity.applicantList">
+                                            <img ng-src="./file/user/defineUserImg.jpg"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-out-show">
+                                        <span class="activity-introduce">{{myactivity.introduce}}</span>
+                                        <!-- <img ng-src="{{activity.imgUrl}}" class="activity-img"/> -->
+                                        <p>
+                                            活动时间：{{myactivity.startTime}}到{{myactivity.endTime}}<br/>
+                                            报名时间：{{myactivity.applyStartTime}}到{{myactivity.applyEndTime}}<br/>
+                                            活动地点：{{myactivity.location}}<br/>
+                                            活动发布人：{{myactivity.host_email}}
+                                        </p>
+                                        <span class="activity-detail" ng-click="myactivity.discriptShow = !myactivity.discriptShow">详情</span>
+                                    </div>
+                                    <div class="activity-detail-slice" ng-show="myactivity.discriptShow">
+                                        <p>
+                                            活动详情：{{myactivity.theme}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--编辑活动弹框-->
+            <div class="editActive" style="display: none" id="editActive">
+            <div class="addActive-in">
+                <div class="add-activity-head">
+                    <i style="margin-top:-10px" class="icon-angle-left icon-2x pull-left ACLIgoback" ng-click="closeLayer(editActivityFormLayer);editActivityFormLayer=null;"></i>
+                    <span>活动编辑</span>
+                </div>
+                <table class="add-activity-form">
+                    <tr>
+                        <td class="add-activity-table-left">活动名</td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.activityName" placeholder=""/></td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">发起者</span></td>
+                        <td class="add-activity-table-right">
+                            <span ng-show="isLogin">{{editActivity.host_email}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="editActivity-startTime" class="time-input" type="text" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})" value="{{editActivity.startTime}}"/>到
+                            <input id="editActivity-endTime" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value="{{editActivity.endTime}}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">报名时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="editActivity-applyStartTime" class="time-input" value="{{editActivity.applyStartTime}}" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="editActivity-applyEndTime" class="time-input" value="{{editActivity.applyEndTime}}" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动地点</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.location"/></td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">信息发布范围</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.msgAddress"/></td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">封面图</span></td>
+                        <td class="add-activity-table-right add-activity-table-right-img">
+                            <div class="" style="position: relative;">
+                                <input type="file" id="editActivityImg" class="registHeadUrl" name="editActivityImg" onchange="angular.element(this).scope().upToSpare(this,'editActivity')" /></input>
+                                <img ng-src="{{editActivity.coverImg?editActivity.coverImg:'./file/addNewImg.jpg'}}"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动简介</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.introduce"/></td>
+                    </tr>
+                    <tr style="border-bottom: 0px;">
+                        <td class="add-activity-table-left"><span class="table-left">活动详情</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 0px 0px 5px 0px;">
+                            <textarea ng-model="editActivity.theme">
+                            </textarea>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 0px;">
+                    <td class="add-activity-table-left"><span class="table-left">图片</span></td>
+                    </tr>
+                    <tr style="border-bottom: 0px;">
+                        <td colspan="2" class="add-activity-table-moreImg"  style="padding:5px;">
+                            <div ng-repeat="activityImg in editActivity.ImgList" class="activity-moreImg" style="position: relative;background-image: url({{activityImg.imgUrl}})">
+                            </div>
+                            <div class="activity-moreImg" style="position: relative;width: 80px;height: 80px;">
+                                <input type="file" id="activityImgList" class="registHeadUrl" name="activityImgList" onchange="angular.element(this).scope().upToSpare(this,'editActivityImgList')" /></input>
+                                <div class="activity-moreImg" style="background-image: url(./file/addNewImg.jpg)"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" style="width: 70%;height: 20px;font-size: 15px;line-height: 0;" ng-disabled="!checkActivity('editAll')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="inputEditActivity('mobile')">提交</button>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="add-activity-form-pc">
+                    <tr>
+                        <td class="add-activity-table-left">活动名</td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.activityName" placeholder=""/></td>
+
+                        <td rowspan="2" class="add-activity-table-left"><span class="table-left">封面图</span></td>
+                        <td rowspan="2" class="add-activity-table-right add-activity-table-right-img">
+                            <div class="" style="position: relative;">
+                                <input type="file" id="editActivityImgPC" class="registHeadUrl" name="editActivityImgPC" onchange="angular.element(this).scope().upToSpare(this,'editActivity')" /></input>
+                                <img ng-src="{{editActivity.coverImg?editActivity.coverImg:'./file/addNewImg.jpg'}}"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">发起者邮箱</span></td>
+                        <td class="add-activity-table-right">
+                            <span ng-show="isLogin">{{editActivity.host_email}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="editActivity-startTime-pc" value="{{editActivity.startTime}}" class="time-input" type="text" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="editActivity-endTime-pc" value="{{editActivity.endTime}}" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                        </td>
+
+                        <td class="add-activity-table-left"><span class="table-left">报名时间</span></td>
+                        <td class="add-activity-table-right">
+                            <input id="editActivity-applyStartTime-pc" value="{{editActivity.applyStartTime}}" class="time-input" onclick="laydate({format: 'YYYY-MM-DD',isclear: true,istoday: true,issure: true,})"/>到
+                            <input id="editActivity-applyEndTime-pc" value="{{editActivity.applyEndTime}}" class="time-input" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  class="add-activity-table-left"><span class="table-left">活动地点</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.location"/></td>
+                        <td class="add-activity-table-left"><span class="table-left">信息发布范围</span></td>
+                        <td class="add-activity-table-right"><input type="text" ng-model="editActivity.msgAddress"/></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td class="add-activity-table-left"><span class="table-left">活动简介</span></td>
+                        <td colspan="3" class="add-activity-table-right"><input type="text" style="width: 100%" ng-model="editActivity.introduce"/></td>
+                    </tr>
+                    <tr style="border-bottom: 0px;">
+                        <td class="add-activity-table-left"><span class="table-left">活动详情</span></td>
+
+                        <td colspan="3" style="padding: 0px 0px 5px 0px;">
+                            <textarea ng-model="editActivity.theme">
+                            </textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="add-activity-table-moreImg"  style="padding:5px;">
+                            <div ng-repeat="activityImg in editActivity.ImgList" class="activity-moreImg" style="position: relative;background-image: url({{activityImg.imgUrl}})">
+                            </div>
+                            <div class="activity-moreImg" style="position: relative;width: 80px;height: 80px;">
+                                <input type="file" id="activityImgListPC" class="registHeadUrl" name="activityImgListPC" onchange="angular.element(this).scope().upToSpare(this,'editActivityImgList')" /></input>
+                                <div class="activity-moreImg" style="background-image: url(./file/addNewImg.jpg)"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <button type="button" style="width: 70%;height: 20px;font-size: 15px;line-height: 0;" ng-disabled="!checkActivity('editAll')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="inputEditActivity('pc')">提交</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@ $password = md5($_POST['password']);
 if($id = $database->checkUser($email, $password)) {
 	session_start();
 	$_SESSION['id'] = $id;
+	$_SESSION['email'] = $email;
 	$_SESSION['password'] = $password;
 	$_SESSION['checkStr'] = md5($id.$password);
 	$json = ['code' => 1000, 'data' => '登录成功！'];

@@ -60,6 +60,18 @@ section {
     right: 25px;
     margin-top: -15px;
 }
+.input-list-img img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px dotted #737373;
+}
+.input-list-img input{
+    position: absolute;
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+}
 .sub-btn {
     width: 100%;
     margin-top: 25px;
@@ -68,6 +80,9 @@ section {
     position: absolute;
     right: 15px;
     color: #b30000;
+}
+.editpasswordCL:hover{
+    cursor: pointer;
 }
 .registFinish {
     display: block;
@@ -134,93 +149,100 @@ section {
 <div class="registBlock">
     <article class="container">
         <nav class="row">
-            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='base', 'had': show.schedule=='detail'||show.schedule=='finish'}">填写账号信息</div>
-            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='detail', 'had': show.schedule=='finish','will':show.schedule=='base'}">完善账号信息</div>
-            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='finish', 'will':show.schedule=='detail'||show.schedule=='base'}">注册成功</div>
+            <div class="regist-schedule col-md-12 col-xs-12 col-sm-12 text-center" class="show">编辑信息</div>
+<!--             <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='detail', 'had': show.schedule=='finish','will':show.schedule=='base'}">完善账号信息</div>
+            <div class="regist-schedule col-md-4 col-xs-4 col-sm-4 text-center" ng-class="{'show': show.schedule=='finish', 'will':show.schedule=='detail'||show.schedule=='base'}">注册成功</div> -->
         </nav>
-        <section ng-show="show.schedule=='base'">
+        <section>
             <div class="regist-base-form">
                 <form>
                     <ul>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label text-left">邮箱：</label>
-                            <p class="Tipmsg" ng-bind="show.registEmailMsg" ng-show="!isStrIsTrue('email',registEmail)"></p>
+                            <!-- <p class="Tipmsg" ng-bind="show.editEmailMsg" ng-show="!isStrIsTrue('email',editEmail)"></p> -->
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registEmail"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <input type="text" class="form-control" id="" ng-model="registEmail">
-                                <i ng-hide="isStrIsTrue('email',registEmail)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
-                                <i ng-show="isStrIsTrue('email',registEmail)" class="icon-ok icon-2x" style="color: #418a41;"></i>
+                                <input type="text" disabled="true" class="form-control" id="" ng-model="userDetail.email">
+<!--                                 <i ng-hide="isStrIsTrue('email',editEmail)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('email',editEmail)" class="icon-ok icon-2x" style="color: #418a41;"></i> -->
                             </div>
                         </li>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label">昵称：</label>
-                            <p class="Tipmsg" ng-bind="show.registNicknameMsg" ng-show="!isStrIsTrue('nickname',registNickname)"></p>
+                            <p class="Tipmsg" ng-bind="show.editNicknameMsg" ng-show="!isStrIsTrue('nickname',userDetail.nickname)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registNickname"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <input type="text" class="form-control" id="" ng-model="registNickname">
-                                <i ng-hide="isStrIsTrue('nickname',registNickname)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
-                                <i ng-show="isStrIsTrue('nickname',registNickname)" class="icon-ok icon-2x" style="color: #418a41;"></i>
+                                <input type="text" class="form-control" id="" ng-model="userDetail.nickname">
+                                <i ng-hide="isStrIsTrue('nickname',userDetail.nickname)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('nickname',userDetail.nickname)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label">密码：</label>
-                            <p class="Tipmsg" ng-bind="show.registPasswordMsg" ng-show="!isStrIsTrue('password',registPassword)"></p>
+                            <p class="Tipmsg editpasswordCL" style="color: blue" ng-click="show.editPassword = !show.editPassword;editOldPassword='';editNewPassword='';editNewPardenPassword='';">修改密码</p>
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="text" disabled="true" class="form-control" id="" value="************">
+                            </div>
+                        </li>
+                        <li class="input-list row" ng-show="show.editPassword">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">原密码：</label>
+                            <p class="Tipmsg" ng-bind="show.editOldPasswordMsg" ng-show="!isStrIsTrue('oldPassword',editOldPassword)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPassword"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <input type="text" class="form-control" id="" ng-model="registPassword">
-                                <i ng-hide="isStrIsTrue('password',registPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
-                                <i ng-show="isStrIsTrue('password',registPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
+                                <input type="text" class="form-control" id="" ng-model="editOldPassword">
+                                <i ng-hide="isStrIsTrue('oldPassword',editOldPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('oldPassword',editOldPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
-                        <li class="input-list row">
-                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">确认密码：</label>
-                            <p class="Tipmsg" ng-bind="show.registPardenPasswordMsg" ng-show="!isStrIsTrue('pardenPassword',registPardenPassword)"></p>
+                        <li class="input-list row" ng-show="show.editPassword">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">新密码：</label>
+                            <p class="Tipmsg" ng-bind="show.editNewPasswordMsg" ng-show="!isStrIsTrue('newPassword',editNewPassword)"></p>
+                            <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPassword"/> -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="text" class="form-control" id="" ng-model="editNewPassword">
+                                <i ng-hide="isStrIsTrue('newPassword',editNewPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('newPassword',editNewPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
+                            </div>
+                        </li>
+                        <li class="input-list row" ng-show="show.editPassword">
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">确认新密码：</label>
+                            <p class="Tipmsg" ng-bind="show.editNewPardenPasswordMsg" ng-show="!isStrIsTrue('pardenPassword',editNewPardenPassword)"></p>
                             <!-- <input class="col-md-7 col-sm-7 col-xs-12" type="text" ng-model="registPardenPassword"/> -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <input type="text" class="form-control" id="" ng-model="registPardenPassword">
-                                <i ng-hide="isStrIsTrue('pardenPassword',registPardenPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
-                                <i ng-show="isStrIsTrue('pardenPassword',registPardenPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
+                                <input type="text" class="form-control" id="" ng-model="editNewPardenPassword">
+                                <i ng-hide="isStrIsTrue('pardenPassword',editNewPardenPassword)" class="icon-remove icon-2x" style="color: #9a3939;"></i>
+                                <i ng-show="isStrIsTrue('pardenPassword',editNewPardenPassword)" class="icon-ok icon-2x" style="color: #418a41;"></i>
                             </div>
                         </li>
-                        <li class="input-list row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" ng-disabled="!isStrIsTrue('all')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="addRegist()">下一步</button>
-                            </div>
-                        </li>
-                    </ul>
-                </form>
-            </div>
-        </section>
-        <section ng-show="show.schedule=='detail'">
-            <div class="regist-detail-form">
-                <form>
-                    <ul>
-                        <li class="input-list row"> 
-                            <lable for="registHeadUrl" class="col-md-3 col-sm-3 col-xs-12 control-label text-left">
-                                <!-- <img ng-src={{files[0].name}} /> -->
-                            </lable>
+<!--                         <li class="input-list row"> 
+
+                            <label class="col-md-3 col-sm-3 col-xs-12 control-label">上传新头像：</label>
+
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <input type="file" id="registHeadUrl" onchange='angular.element(this).scope().fileChanged(this)' /></input>
+                                <input type="file" id="editHeadUrl" onchange='angular.element(this).scope().fileChanged(this)' /></input>
+                            </div>
+                        </li> -->
+                        <li class="input-list input-list-img row"> 
+                            <label for="registHeadUrl" class="col-md-3 col-sm-3 col-xs-12 control-label text-left">上传新头像：</label>
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <input type="file" id="registHeadUrl" name="registHeadUrl" onchange='angular.element(this).scope().upToSpare(this)' /></input>
+                                <img src="{{userDetail.imgUrl}}"/>
                             </div>
                         </li>
                         <li class="input-list row">
                             <label class="col-md-3 col-sm-3 col-xs-12 control-label text-left">签名：</label>
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <textarea class="form-control" ng-model="signature"></textarea>
+                                <textarea class="form-control" ng-model="userDetail.signature"></textarea>
                             </div>
                         </li>
                         <li class="input-list row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="upUserDetail()">提交</button>
+                                <button type="button" ng-disabled="!isStrIsTrue('all')" class="sub-btn unable-btn btn btn-primary btn-lg" ng-click="editUserDetail()">提交</button>
                             </div>
                         </li>
                     </ul>
                 </form>
             </div>
-        </section>
-        <section ng-show="show.schedule=='finish'">
-            <span class="registFinish">完成注册！</span>
-            <a class="registBack" href="./map.html">back</a>
         </section>
     </article>
 </div>

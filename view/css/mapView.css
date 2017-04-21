@@ -83,15 +83,17 @@ ul,li{
     color: #fff;
 }
 /*活动添加模块*/
-.addActive{
+.addActive,.editActive{
     width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    background: #4178bd;
+}
+.addActive-in{
     padding: 5px;
     color: #fff;
-    box-sizing: border-box;
     margin: 0;
-    box-shadow: 0px 0px 2px 1px #4e4e4e;
     background: #4178bd url(../../bs/img/activity-create-pic-1.png) no-repeat center 60px;
-    max-width: 350px;
     border-radius: 2px;
 }
 .add-activity-head {
@@ -110,6 +112,7 @@ ul,li{
     color: #808080;
     border-collapse:collapse;
     text-align: center;
+    width: 100%
 }
 .add-activity-form tr{
     border-bottom: 1px solid #808080;
@@ -123,17 +126,79 @@ ul,li{
 }
 .add-activity-form input:focus {
     outline: #ffffff auto 1px;
-    border-bottom: 1px solid #0044ff;
+    border-bottom: 2px solid #ebb64b;
 }
 .add-activity-form input {
     border: 0px solid #9e9e9e;
     text-align: center;
     font-size: 15px;
     font-weight: bolder;
+    border-bottom: 1px solid #e4d77b;
+}
+.add-activity-form-pc {
+    background: #fff;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    color: #808080;
+    width: 100%;
+    margin-top: 16px;
+    padding: 0px 3px;
+    text-align: center;
+}
+.add-activity-form-pc .time-input {
+    width: 45%;
+}
+.add-activity-form-pc tr{
+    border-bottom: 1px solid #b9b9b9;
+}
+.add-activity-form-pc tr:focus {
+    color: #0c72cc;
+}
+.add-activity-form-pc td {
+    padding: 10px 0px;
+}
+.add-activity-form-pc input:focus {
+    outline: #ffffff auto 1px;
+    border-bottom: 2px solid #ebb64b;
+}
+.registHeadUrl:hover {
+    cursor: pointer;
+}
+.add-activity-form-pc input {
+    border:0px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bolder;
+    border-bottom: 1px solid rgb(217, 220, 165);
+}
+.add-activity-form-pc textarea{
+    height: 67px;
+    width: 95%;
+    margin: 5px;
+    box-sizing: border-box;
+    border: 1px solid #d9dca5;
+}
+.add-activity-form-pc textarea:focus{
+    outline: #ffffff auto 1px;
+    border: 2px solid #ebb64b;
 }
 .add-activity-table-left{
     width:30%;
     font-size: 15px;
+}
+.add-activity-table-right-img img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px dotted #737373;
+}
+.add-activity-table-right-img input{
+    position: absolute;
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    left: 50%;
 }
 .add-activity-form .time-input {
     width: 40%;
@@ -143,6 +208,7 @@ ul,li{
     width: 95%;
     box-sizing: border-box;
     height: 100px;
+    border: 1px solid #eae09a;
 }
 /*用户基本信息弹窗*/
 #userBomb {
@@ -181,8 +247,14 @@ ul,li{
 .user-bomb-head:hover {
     color: #fff;
 }
+.user-bomb-head img{
+    width: 40px;
+    height: 40px;
+    float: left;
+    border-radius: 50%;
+}
 .user-bomb-head i{
-    line-height:40px;
+    line-height: 40px;
 }
 .user-bomb-head span{
     margin-left: 15px;
@@ -223,6 +295,7 @@ ul,li{
 }
 .login-content {
     padding: 20px;
+    position:relative;
 }
 .login-content li {
     list-style: none;
@@ -269,6 +342,7 @@ ul,li{
     text-align: center;
     height:15vh;
     box-sizing: border-box;
+    position:relative;
 }
 .activity-bomb-content {
     height: 100vh;
@@ -294,6 +368,94 @@ ul,li{
 }
 .activity-head {
     position: relative;
+}
+.activity-head img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #eaeaea;
+    float: left;
+}
+.activity-head-left {
+    display: inline-block;
+    line-height: 30px;
+    float: left;
+    padding: 10px;
+}
+.activity-head-left span {
+    display: block;
+}
+.activity-head-left .activyty-name {
+    font-weight: bold;
+    font-size: 17px;
+}
+.activity-head-right {
+    float: right;
+    text-align: right;
+    position: relative;
+}
+.myactivity-select-block {
+    width: 95%;
+    margin: auto;
+    position: absolute;
+    bottom: 10px;
+}
+.myactivity-select-block:after{
+    content:'';
+    display: block;
+    clear: both;
+}
+.myactivity-select {
+    display: inline-block;
+    width: 50%;
+    float: left;
+    border: 1px solid #fff;
+    height: 30px;
+    line-height: 28px;
+}
+.myactivity-select:hover{
+    cursor: pointer;
+}
+.myactivity-selected {
+    background-color: rgba(255, 255, 255, 0.46);
+}
+.activity-right-baoming {
+    right: 0px;
+    top: 0px;
+    color: #4876ad;
+    font-size: 14px;
+    display: block;
+}
+.activity-right-baoming:hover {
+    cursor: pointer;
+}
+.activity-canjia-btn {
+    background: #367dd2;
+    border: 1px solid #dedede;
+    color: #fff!important;
+    padding: 3px 20px;
+    border-radius: 7px;
+}
+.activity-head:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.applicant-block {
+    border-top: 1px solid #b3b3b3;
+    border-bottom: 1px solid #b3b3b3;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.applicant-block li {
+    margin: 2px;
+    display: inline-block;
+}
+.applicant-block img {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c3c3c3;
+    border-radius: 50%;
 }
 .activity-out-show {
     position: relative;
@@ -341,6 +503,15 @@ ul,li{
     .loginBlock{
         height: 100vh;
     }
+    .addActive,.editActive{
+        height: 100vh;
+    }
+    .add-activity-form{
+        display: block;
+    }
+    .add-activity-form-pc{
+        display: none;
+    }
 }
 @media (min-width: 767px) and (max-width:992px) {
     .ACLIgoback{
@@ -351,6 +522,15 @@ ul,li{
     }
     .activity-bomb-head {
         height:100px;
+    }
+    .addActive,.editActive{
+        height: 86vh;
+    }
+    .add-activity-form{
+        display: none;
+    }
+    .add-activity-form-pc{
+        display: block;
     }
 }
 @media (min-width: 992px) and (max-width:1200px) {
@@ -363,6 +543,15 @@ ul,li{
     .activity-bomb-head {
         height:100px;
     }
+    .addActive,.editActive{
+        height: 86vh;
+    }
+    .add-activity-form{
+        display: none;
+    }
+    .add-activity-form-pc{
+        display: block;
+    }
 }
 @media (min-width: 1200px) {
     .ACLIgoback{
@@ -374,5 +563,29 @@ ul,li{
     .activity-bomb-head {
         height:100px;
     }
+    .addActive,.editActive{
+        height: 86vh;
+    }
+    .add-activity-form{
+        display: none;
+    }
+    .add-activity-form-pc{
+        display: block;
+    }
 }
 /******************************************************************活动列表弹框-end*******************************************************/
+/******************************************************************添加活动弹框-start*******************************************************/
+.add-activity-table-moreImg .activity-moreImg {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    background-size: 80px;
+    border: 1px solid #bfbfbf;
+}
+.add-activity-table-moreImg input {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+        opacity: 0;
+}
+/******************************************************************添加活动弹框-end*******************************************************/
